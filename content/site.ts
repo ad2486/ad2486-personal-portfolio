@@ -8,7 +8,11 @@ export type IconKey =
   | "oracle" | "java" | "react" | "functional" | "github" | "youtube"
   | "linkedin" | "discordjs" | "vitest" | "openapi" | "email";
 
-export type Link = { label: string; href: string; icon: IconKey; detail?: string };
+/** E-mail stays split so the address never appears whole in the static HTML; EmailLink joins it in the browser. */
+export type Link = { label: string; icon: IconKey } & (
+  | { href: string; email?: never }
+  | { email: { user: string; domain: string }; href?: never }
+);
 
 export type Project = {
   slug: string;
@@ -268,7 +272,7 @@ export const site = {
   contact: {
     title: "Contato",
     links: [
-      { label: "E-mail", detail: "arthur.duarte2486@gmail.com", href: "mailto:arthur.duarte2486@gmail.com", icon: "email" },
+      { label: "E-mail", email: { user: "arthur.duarte2486", domain: "gmail.com" }, icon: "email" },
       { label: "GitHub", href: "https://github.com/ad2486", icon: "github" },
       { label: "LinkedIn", href: "https://linkedin.com/in/arthur-duarte-ad2486", icon: "linkedin" },
       { label: "YouTube", href: "https://youtube.com/@ad.2486", icon: "youtube" },

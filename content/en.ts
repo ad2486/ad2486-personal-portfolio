@@ -239,7 +239,7 @@ export const site: Site = {
   contact: {
     title: "Contact",
     links: [
-      { label: "Email", detail: "arthur.duarte2486@gmail.com", href: "mailto:arthur.duarte2486@gmail.com", icon: "email" },
+      { label: "Email", email: { user: "arthur.duarte2486", domain: "gmail.com" }, icon: "email" },
       { label: "GitHub", href: "https://github.com/ad2486", icon: "github" },
       { label: "LinkedIn", href: "https://linkedin.com/in/arthur-duarte-ad2486", icon: "linkedin" },
       { label: "YouTube", href: "https://youtube.com/@ad.2486", icon: "youtube" },
