@@ -5,7 +5,7 @@ import { Reveal } from "@/components/Reveal";
 import { getSite } from "@/content/i18n";
 import type { Project, Site } from "@/content/site";
 
-// lg bento: 12 cols, exactly 6 cells (7x2 | 5 / 5, then 4 + 4 + 4).
+// lg bento: 12 cols (7 + 5, 4 + 4 + 4, Homelab full). Projects added later default to 4 cols.
 const spans: Record<string, string> = {
   "backend-ticketeira": "lg:col-span-7",
   "dev-tool-cli": "lg:col-span-5",
@@ -127,7 +127,7 @@ export async function Projetos() {
 
         <div className="mt-14 grid grid-cols-1 gap-4 md:mt-20 lg:grid-cols-12">
           {items.map((p, i) => (
-            <Reveal key={p.slug} className={spans[p.slug]} delay={i * 0.08}>
+            <Reveal key={p.slug} className={spans[p.slug] ?? "lg:col-span-4"} delay={i * 0.08}>
               <ProjectCard p={p} ui={site.ui} />
             </Reveal>
           ))}

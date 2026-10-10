@@ -1,4 +1,6 @@
 // Client-safe locale registry (no server-only imports here).
+export const siteUrl = "https://arthur-duarte-portfolio.com.br";
+
 export const locales = ["pt", "en", "de"] as const;
 export type Locale = (typeof locales)[number];
 

@@ -17,9 +17,16 @@ concurrency:
 jobs:
   atualizar:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
 
       - uses: anthropics/claude-code-action@v1
         env:
@@ -28,31 +35,67 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           claude_args: |
             --model claude-sonnet-5-5
-            --max-turns 30
-            --allowedTools "Read,Edit,Write,Glob,Grep,Bash(gh api:*),Bash(gh repo view:*)"
+            --max-turns 40
+            --allowedTools "Read,Edit,Glob,Grep,Bash(gh api:*),Bash(gh repo view:*),Bash(npx next typegen),Bash(npx tsc --noEmit)"
           prompt: |
-            Você mantém o conteúdo do portfolio do Arthur Duarte (GitHub: ad2486).
-            O arquivo fonte do conteúdo é portfolio.md, na raiz deste repositório.
+            Você mantém a seção de projetos do portfolio do Arthur Duarte (GitHub: ad2486).
+            É um site Next.js com conteúdo em três idiomas:
+            - content/site.ts: português, fonte principal; define os tipos Project e Site
+            - content/en.ts: inglês
+            - content/de.ts: alemão
+            Leia esses três arquivos antes de começar.
 
-            1. Liste os repositórios públicos de ad2486 que têm a topic "portfolio":
-               gh api "users/ad2486/repos?per_page=100" e filtre pelo campo topics.
-            2. Para cada um, leia a descrição, as linguagens (gh api repos/ad2486/NOME/languages)
-               e o README (gh repo view ad2486/NOME).
-            3. Atualize a seção "Projetos" de portfolio.md:
-               - adicione projetos novos, no mesmo formato dos existentes;
-               - atualize stack, status e descrição dos que mudaram;
-               - remova projetos que perderam a topic "portfolio".
-            4. Não mexa nas outras seções do arquivo.
+            1. Liste os repositórios públicos de ad2486 com gh api "users/ad2486/repos?per_page=100"
+               e separe pelo campo topics:
+               - topic "portfolio" → projetos principais (projects.items)
+               - topic "portfolio-outros" → lista curta "Outros no GitHub" (projects.others.items)
+            2. Para cada repo dessas duas listas, leia descrição, linguagens
+               (gh api repos/ad2486/NOME/languages) e README (gh repo view ad2486/NOME).
+            3. Atualize projects.items e projects.others.items nos TRÊS arquivos:
+               - adicione repos novos no mesmo formato dos itens existentes; em projects.items,
+                 use o nome do repo como slug, repo: "https://github.com/ad2486/NOME" e
+                 image: "/projects/NOME.png";
+               - atualize summary, details, stack e status de itens cujo repo mudou;
+               - remova itens cujo repo perdeu a topic correspondente;
+               - nunca altere nem remova itens sem campo repo/href (ex.: Homelab): são manuais;
+               - mantenha a ordem existente; itens novos vão no fim.
+            4. Para cada projeto novo em projects.items, adicione o nome do repo ao array
+               repos=(...) em scripts/fetch-assets.sh. A imagem é baixada por um passo seguinte.
+            5. Valide rodando npx next typegen e depois npx tsc --noEmit. Corrija qualquer erro.
 
             Regras:
             - Use só informação que está nos repositórios. Não invente features, números ou tecnologias.
-            - Escreva em português, tom direto e técnico, frases curtas.
+            - Não mexa em nada fora de projects (sobre, stack, conteúdo, contato, ui, meta).
+            - Português: tom direto e técnico, frases curtas. Traduza o mesmo conteúdo para en e de,
+              no tom dos itens já existentes em cada arquivo.
             - Se nada mudou, não edite nenhum arquivo.
+
+      - name: Baixar imagens de projetos novos
+        run: |
+          repos=$(grep -oP '^repos=\(\K[^)]*' scripts/fetch-assets.sh)
+          for repo in $repos; do
+            if [ ! -f "public/projects/${repo}.png" ]; then
+              curl -fsSL --retry 10 --retry-delay 15 \
+                "https://opengraph.githubassets.com/1/ad2486/${repo}" -o "public/projects/${repo}.png"
+              sleep 2
+            fi
+          done
+
+      - name: Checar tipos
+        run: npx next typegen && npx tsc --noEmit
 
       - uses: peter-evans/create-pull-request@v7
         with:
           branch: bot/atualizar-portfolio
+          add-paths: |
+            content/site.ts
+            content/en.ts
+            content/de.ts
+            scripts/fetch-assets.sh
+            public/projects/*.png
           commit-message: "chore: atualiza projetos do portfolio"
           title: "Atualização automática do portfolio"
-          body: "Atualização gerada pelo Claude a partir dos repositórios com a topic `portfolio`. Revise antes de dar merge."
+          body: |
+            Atualização gerada pelo Claude a partir dos repositórios com as topics `portfolio` e `portfolio-outros`.
+            Revise os textos nos três idiomas antes de dar merge. Depois do merge, o deploy roda sozinho.
           delete-branch: true
