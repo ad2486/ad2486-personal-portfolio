@@ -6,7 +6,8 @@ export type IconKey =
   | "nodejs" | "fastify" | "prisma" | "zod" | "docker" | "linux" | "arch"
   | "cachyos" | "fedora" | "debian" | "ubuntu" | "githubactions" | "ssh"
   | "oracle" | "java" | "react" | "functional" | "github" | "youtube"
-  | "linkedin" | "discordjs" | "vitest" | "openapi" | "email";
+  | "linkedin" | "discordjs" | "vitest" | "openapi" | "email"
+  | "fastapi" | "mysql" | "aws" | "nginx";
 
 /** E-mail stays split so the address never appears whole in the static HTML; EmailLink joins it in the browser. */
 export type Link = { label: string; icon: IconKey } & (
@@ -112,9 +113,11 @@ export const site = {
         items: [
           { label: "Node.js", icon: "nodejs" },
           { label: "Fastify", icon: "fastify" },
+          { label: "FastAPI", icon: "fastapi" },
           { label: "Prisma", icon: "prisma" },
           { label: "Zod", icon: "zod" },
           { label: "PostgreSQL", icon: "postgresql" },
+          { label: "MySQL", icon: "mysql" },
         ],
       },
       {
@@ -127,8 +130,10 @@ export const site = {
           { label: "Debian", icon: "debian" },
           { label: "Ubuntu Server", icon: "ubuntu" },
           { label: "Docker", icon: "docker" },
+          { label: "nginx", icon: "nginx" },
           { label: "SSH", icon: "ssh" },
           { label: "Oracle Cloud", icon: "oracle" },
+          { label: "AWS", icon: "aws" },
           { label: "GitHub Actions", icon: "githubactions" },
         ],
       },

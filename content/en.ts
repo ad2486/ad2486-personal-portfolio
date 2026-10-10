@@ -79,9 +79,11 @@ export const site: Site = {
         items: [
           { label: "Node.js", icon: "nodejs" },
           { label: "Fastify", icon: "fastify" },
+          { label: "FastAPI", icon: "fastapi" },
           { label: "Prisma", icon: "prisma" },
           { label: "Zod", icon: "zod" },
           { label: "PostgreSQL", icon: "postgresql" },
+          { label: "MySQL", icon: "mysql" },
         ],
       },
       {
@@ -94,8 +96,10 @@ export const site: Site = {
           { label: "Debian", icon: "debian" },
           { label: "Ubuntu Server", icon: "ubuntu" },
           { label: "Docker", icon: "docker" },
+          { label: "nginx", icon: "nginx" },
           { label: "SSH", icon: "ssh" },
           { label: "Oracle Cloud", icon: "oracle" },
+          { label: "AWS", icon: "aws" },
           { label: "GitHub Actions", icon: "githubactions" },
         ],
       },
