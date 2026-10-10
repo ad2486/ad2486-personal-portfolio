@@ -1,0 +1,58 @@
+name: Atualizar portfolio
+
+on:
+  schedule:
+    - cron: "0 12 * * 1" # toda segunda, 09:00 em Brasília (12:00 UTC)
+  workflow_dispatch: # permite rodar manualmente pela aba Actions
+
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
+
+concurrency:
+  group: atualizar-portfolio
+  cancel-in-progress: true
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: anthropics/claude-code-action@v1
+        env:
+          GH_TOKEN: ${{ github.token }}
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_args: |
+            --model claude-sonnet-5-5
+            --max-turns 30
+            --allowedTools "Read,Edit,Write,Glob,Grep,Bash(gh api:*),Bash(gh repo view:*)"
+          prompt: |
+            Você mantém o conteúdo do portfolio do Arthur Duarte (GitHub: ad2486).
+            O arquivo fonte do conteúdo é portfolio.md, na raiz deste repositório.
+
+            1. Liste os repositórios públicos de ad2486 que têm a topic "portfolio":
+               gh api "users/ad2486/repos?per_page=100" e filtre pelo campo topics.
+            2. Para cada um, leia a descrição, as linguagens (gh api repos/ad2486/NOME/languages)
+               e o README (gh repo view ad2486/NOME).
+            3. Atualize a seção "Projetos" de portfolio.md:
+               - adicione projetos novos, no mesmo formato dos existentes;
+               - atualize stack, status e descrição dos que mudaram;
+               - remova projetos que perderam a topic "portfolio".
+            4. Não mexa nas outras seções do arquivo.
+
+            Regras:
+            - Use só informação que está nos repositórios. Não invente features, números ou tecnologias.
+            - Escreva em português, tom direto e técnico, frases curtas.
+            - Se nada mudou, não edite nenhum arquivo.
+
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          branch: bot/atualizar-portfolio
+          commit-message: "chore: atualiza projetos do portfolio"
+          title: "Atualização automática do portfolio"
+          body: "Atualização gerada pelo Claude a partir dos repositórios com a topic `portfolio`. Revise antes de dar merge."
+          delete-branch: true
