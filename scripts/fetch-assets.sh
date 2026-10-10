@@ -3,7 +3,7 @@
 set -euo pipefail
 
 user="ad2486"
-repos=(backend-ticketeira dev-tool-cli multi-llm-cli welcoming-discord-bot youtube-discord-bot)
+repos=(backend-ticketeira dev-tool-cli multi-llm-cli welcoming-discord-bot youtube-discord-bot ad2486-personal-portfolio)
 
 mkdir -p public/projects
 curl -fsSL "https://avatars.githubusercontent.com/${user}?s=800" -o public/avatar.jpg # GitHub serve JPEG

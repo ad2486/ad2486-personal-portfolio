@@ -124,13 +124,13 @@ export const site: Site = {
         slug: "backend-ticketeira",
         title: "Ticketsystem für Veranstaltungen",
         summary:
-          "Plattform, auf der jeder Nutzer Veranstaltungen erstellen, Plätze zum Verkauf freigeben und Tickets kaufen kann.",
+          "API für den Ticketverkauf bei Veranstaltungen. Bisher gibt es die Nutzerregistrierung; Veranstaltungen, Bestellungen und Tickets sind schon im Datenmodell.",
         details: [
-          "Authentifizierung mit JWT + argon2, Validierung mit Zod, Rate Limiting und OpenAPI-Dokumentation.",
-          "Nebenläufigkeit beim Verkauf wird mit atomarem Update / SELECT FOR UPDATE behandelt, damit nicht über die Kapazität hinaus verkauft wird.",
-          "Begrenzung der Veranstaltungen pro Nutzer über Tiers.",
+          "Fastify mit Validierung über Zod, OpenAPI-Dokumentation unter /docs und Passwörtern mit argon2.",
+          "Datenmodell in Prisma 8 und PostgreSQL, mit Nutzern in Tiers (free, verified, pro), Veranstaltungen, Bestellungen und Tickets.",
+          "Constraints in der Datenbank, etwa sold_tickets <= capacity, schützen die Kapazität einer Veranstaltung.",
         ],
-        stack: ["TypeScript", "Fastify", "PostgreSQL", "Prisma", "Zod", "OpenAPI", "Vitest", "Docker Compose"],
+        stack: ["TypeScript", "Fastify", "PostgreSQL", "Prisma", "Zod", "OpenAPI", "Docker Compose"],
         status: "In Arbeit",
         repo: "https://github.com/ad2486/backend-ticketeira",
         image: "/projects/backend-ticketeira.png",
@@ -139,8 +139,10 @@ export const site: Site = {
       {
         slug: "dev-tool-cli",
         title: "dev-tool-cli",
-        summary: "CLI, die Entwicklungsumgebungen einrichtet.",
+        summary: "CLI, die Entwicklungsumgebungen mit einem Befehl einrichtet, auf jedem Rechner gleich.",
         details: [
+          "Installiert die Toolchains für Python (uv) und Rust (rustup), legt das Projekt an und hält die Versionen in dev.toml fest. dev doctor prüft, was auf dem Rechner fehlt.",
+          "Einzelnes Binary für macOS und Linux, mit Installer, der die SHA-256-Prüfsumme verifiziert.",
           "Modulare Architektur (cli, config, core, errors, os, providers) auf Basis eines Provider-Traits und einer Registry.",
           "Tests mit Fakes. Automatisierte Releases über GitHub Actions.",
         ],
@@ -152,8 +154,12 @@ export const site: Site = {
       {
         slug: "multi-llm-cli",
         title: "multi-llm-cli",
-        summary: "CLI für die Arbeit mit mehreren LLMs.",
-        stack: ["Python"],
+        summary: "Terminal-CLI zum Chatten mit mehreren LLMs, gedacht, um kostenlose Modelle verschiedener Anbieter leichter zugänglich zu machen.",
+        details: [
+          "Unterstützt OpenRouter, Groq und Google. Mehrstufiger Verlauf, Markdown im Terminal, Wechsel von Modell und Anbieter mitten im Gespräch und Import von Dateien in den Kontext.",
+          "Optionales Tool Calling (bash, read_file, write_file) bei OpenRouter und Groq. Jede Ausführung fragt nach Bestätigung, Standard ist Nein.",
+        ],
+        stack: ["Python", "uv"],
         repo: "https://github.com/ad2486/multi-llm-cli",
         image: "/projects/multi-llm-cli.png",
       },
@@ -169,7 +175,11 @@ export const site: Site = {
       {
         slug: "youtube-discord-bot",
         title: "YouTube-Benachrichtigungsbot für Discord",
-        summary: "Kündigt auf dem Server automatisch an, wenn ein neues Video auf dem YouTube-Kanal erscheint.",
+        summary: "Meldet auf dem Server, wenn ein neues Video auf dem YouTube-Kanal erscheint oder ein Livestream startet. Nutzt den RSS-Feed, ohne Google-API-Key.",
+        details: [
+          "Der RSS-Feed zeigt einen Livestream erst, nachdem er beendet ist. Deshalb fragt der Bot in jedem Zyklus auch die /live-Seite des Kanals ab.",
+          "Speichert bereits gemeldete IDs in data/state.json, damit nach einem Neustart nichts doppelt gemeldet wird.",
+        ],
         stack: ["JavaScript", "discord.js", "Docker"],
         repo: "https://github.com/ad2486/youtube-discord-bot",
         image: "/projects/youtube-discord-bot.png",
@@ -181,6 +191,15 @@ export const site: Site = {
           "Ubuntu Server, aufgebaut aus einem alten Rechner, mit fester IP über Netplan und SSH-Zugang per Schlüssel.",
         details: ["Dient als Labor für Backend, Datenbanken und Docker."],
         stack: ["Ubuntu Server", "Netplan", "SSH", "Docker"],
+      },
+      {
+        slug: "ad2486-personal-portfolio",
+        title: "Persönliches Portfolio",
+        summary: "Diese Website: Next.js mit statischem Export in drei Sprachen, ausgeliefert von nginx auf einer VM in der Oracle Cloud.",
+        details: ["Deployment über GitHub Actions. Die Projektliste wird wöchentlich von Claude aktualisiert."],
+        stack: ["TypeScript", "Next.js", "nginx", "Oracle Cloud", "GitHub Actions"],
+        repo: "https://github.com/ad2486/ad2486-personal-portfolio",
+        image: "/projects/ad2486-personal-portfolio.png",
       },
     ],
     others: {
