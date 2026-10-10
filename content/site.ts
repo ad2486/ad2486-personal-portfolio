@@ -155,13 +155,13 @@ export const site = {
         slug: "backend-ticketeira",
         title: "Sistema de bilheteria de eventos",
         summary:
-          "Plataforma em que qualquer usuário pode criar eventos, liberar assentos para venda e comprar ingressos.",
+          "API de venda de ingressos para eventos. Hoje tem o cadastro de usuários; eventos, pedidos e ingressos já estão no modelo de dados.",
         details: [
-          "Autenticação com JWT + argon2, validação com Zod, rate limiting e documentação OpenAPI.",
-          "A concorrência na venda é tratada com update atômico / SELECT FOR UPDATE para não vender acima da capacidade.",
-          "Limite de eventos por usuário via tiers.",
+          "Fastify com validação via Zod, documentação OpenAPI em /docs e senhas com argon2.",
+          "Modelo de dados em Prisma 8 e PostgreSQL, com usuários em tiers (free, verified, pro), eventos, pedidos e ingressos.",
+          "Constraints no banco, como sold_tickets <= capacity, protegem a capacidade do evento.",
         ],
-        stack: ["TypeScript", "Fastify", "PostgreSQL", "Prisma", "Zod", "OpenAPI", "Vitest", "Docker Compose"],
+        stack: ["TypeScript", "Fastify", "PostgreSQL", "Prisma", "Zod", "OpenAPI", "Docker Compose"],
         status: "Em andamento",
         repo: "https://github.com/ad2486/backend-ticketeira",
         image: "/projects/backend-ticketeira.png",
@@ -170,8 +170,10 @@ export const site = {
       {
         slug: "dev-tool-cli",
         title: "dev-tool-cli",
-        summary: "CLI que configura ambientes de desenvolvimento.",
+        summary: "CLI que configura ambientes de desenvolvimento com um comando, do mesmo jeito em qualquer máquina.",
         details: [
+          "Instala as toolchains de Python (uv) e Rust (rustup), cria o projeto e registra as versões em dev.toml. O dev doctor confere o que falta na máquina.",
+          "Binário único para macOS e Linux, com instalador que verifica o SHA-256.",
           "Arquitetura modular (cli, config, core, errors, os, providers) baseada em trait Provider e Registry.",
           "Testes usando fakes. Release automatizado via GitHub Actions.",
         ],
@@ -183,8 +185,12 @@ export const site = {
       {
         slug: "multi-llm-cli",
         title: "multi-llm-cli",
-        summary: "CLI para trabalhar com múltiplos LLMs.",
-        stack: ["Python"],
+        summary: "CLI de terminal para conversar com vários LLMs, feita para facilitar o acesso a modelos gratuitos de diferentes provedores.",
+        details: [
+          "Suporta OpenRouter, Groq e Google. Histórico multi-turno, markdown no terminal, troca de modelo e provedor durante a conversa e importação de arquivos para o contexto.",
+          "Tool calling opcional (bash, read_file, write_file) no OpenRouter e no Groq. Cada execução pede confirmação, com padrão em não.",
+        ],
+        stack: ["Python", "uv"],
         repo: "https://github.com/ad2486/multi-llm-cli",
         image: "/projects/multi-llm-cli.png",
       },
@@ -200,7 +206,11 @@ export const site = {
       {
         slug: "youtube-discord-bot",
         title: "Bot de notificação do YouTube para Discord",
-        summary: "Anuncia automaticamente no servidor quando sai vídeo novo no canal do YouTube.",
+        summary: "Avisa no servidor quando sai vídeo novo no canal do YouTube ou quando uma live começa. Usa o feed RSS, sem API key do Google.",
+        details: [
+          "O feed RSS só mostra a transmissão depois que ela termina. Por isso o bot também consulta a página /live do canal a cada ciclo.",
+          "Guarda os IDs já avisados em data/state.json para não repetir aviso após reiniciar.",
+        ],
         stack: ["JavaScript", "discord.js", "Docker"],
         repo: "https://github.com/ad2486/youtube-discord-bot",
         image: "/projects/youtube-discord-bot.png",
@@ -212,6 +222,15 @@ export const site = {
           "Servidor Ubuntu Server montado a partir de uma máquina antiga, com IP fixo via Netplan e acesso SSH por chave.",
         details: ["Usado como laboratório de backend, bancos de dados e Docker."],
         stack: ["Ubuntu Server", "Netplan", "SSH", "Docker"],
+      },
+      {
+        slug: "ad2486-personal-portfolio",
+        title: "Portfólio pessoal",
+        summary: "Este site: Next.js com export estático em três idiomas, servido por nginx numa VM da Oracle Cloud.",
+        details: ["Deploy via GitHub Actions. A lista de projetos é atualizada toda semana pelo Claude."],
+        stack: ["TypeScript", "Next.js", "nginx", "Oracle Cloud", "GitHub Actions"],
+        repo: "https://github.com/ad2486/ad2486-personal-portfolio",
+        image: "/projects/ad2486-personal-portfolio.png",
       },
     ] satisfies Project[],
     others: {

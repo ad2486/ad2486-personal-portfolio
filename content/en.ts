@@ -124,13 +124,13 @@ export const site: Site = {
         slug: "backend-ticketeira",
         title: "Event ticketing system",
         summary:
-          "Platform where any user can create events, release seats for sale and buy tickets.",
+          "Ticket sales API for events. For now it has user sign-up; events, orders and tickets are already in the data model.",
         details: [
-          "Authentication with JWT + argon2, validation with Zod, rate limiting and OpenAPI documentation.",
-          "Concurrency in sales is handled with an atomic update / SELECT FOR UPDATE so capacity is never oversold.",
-          "Per-user event limit via tiers.",
+          "Fastify with Zod validation, OpenAPI documentation at /docs and argon2 password hashing.",
+          "Data model in Prisma 8 and PostgreSQL, with users in tiers (free, verified, pro), events, orders and tickets.",
+          "Database constraints, such as sold_tickets <= capacity, protect event capacity.",
         ],
-        stack: ["TypeScript", "Fastify", "PostgreSQL", "Prisma", "Zod", "OpenAPI", "Vitest", "Docker Compose"],
+        stack: ["TypeScript", "Fastify", "PostgreSQL", "Prisma", "Zod", "OpenAPI", "Docker Compose"],
         status: "In progress",
         repo: "https://github.com/ad2486/backend-ticketeira",
         image: "/projects/backend-ticketeira.png",
@@ -139,8 +139,10 @@ export const site: Site = {
       {
         slug: "dev-tool-cli",
         title: "dev-tool-cli",
-        summary: "CLI that sets up development environments.",
+        summary: "CLI that sets up development environments in one command, the same way on every machine.",
         details: [
+          "Installs the Python (uv) and Rust (rustup) toolchains, creates the project and records the versions in dev.toml. dev doctor checks what is missing on the machine.",
+          "Single binary for macOS and Linux, with an installer that verifies the SHA-256 checksum.",
           "Modular architecture (cli, config, core, errors, os, providers) based on a Provider trait and a Registry.",
           "Tests using fakes. Automated releases via GitHub Actions.",
         ],
@@ -152,8 +154,12 @@ export const site: Site = {
       {
         slug: "multi-llm-cli",
         title: "multi-llm-cli",
-        summary: "CLI for working with multiple LLMs.",
-        stack: ["Python"],
+        summary: "Terminal CLI for chatting with several LLMs, built to make free models from different providers easier to access.",
+        details: [
+          "Supports OpenRouter, Groq and Google. Multi-turn history, markdown in the terminal, switching model and provider mid-conversation and importing files into the context.",
+          "Optional tool calling (bash, read_file, write_file) on OpenRouter and Groq. Every execution asks for confirmation, defaulting to no.",
+        ],
+        stack: ["Python", "uv"],
         repo: "https://github.com/ad2486/multi-llm-cli",
         image: "/projects/multi-llm-cli.png",
       },
@@ -169,7 +175,11 @@ export const site: Site = {
       {
         slug: "youtube-discord-bot",
         title: "YouTube notification bot for Discord",
-        summary: "Automatically announces on the server when a new video is published on the YouTube channel.",
+        summary: "Announces on the server when a new video is published on the YouTube channel or a livestream starts. Uses the RSS feed, no Google API key.",
+        details: [
+          "The RSS feed only shows a stream after it ends. So the bot also checks the channel's /live page on every cycle.",
+          "Stores already-announced IDs in data/state.json so it does not repeat announcements after a restart.",
+        ],
         stack: ["JavaScript", "discord.js", "Docker"],
         repo: "https://github.com/ad2486/youtube-discord-bot",
         image: "/projects/youtube-discord-bot.png",
@@ -181,6 +191,15 @@ export const site: Site = {
           "Ubuntu Server machine built from an old computer, with a static IP via Netplan and key-based SSH access.",
         details: ["Used as a lab for backend, databases and Docker."],
         stack: ["Ubuntu Server", "Netplan", "SSH", "Docker"],
+      },
+      {
+        slug: "ad2486-personal-portfolio",
+        title: "Personal portfolio",
+        summary: "This site: Next.js with static export in three languages, served by nginx on an Oracle Cloud VM.",
+        details: ["Deployed via GitHub Actions. The project list is updated weekly by Claude."],
+        stack: ["TypeScript", "Next.js", "nginx", "Oracle Cloud", "GitHub Actions"],
+        repo: "https://github.com/ad2486/ad2486-personal-portfolio",
+        image: "/projects/ad2486-personal-portfolio.png",
       },
     ],
     others: {
