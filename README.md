@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# portfolio-pessoal
 
-## Getting Started
+Portfólio pessoal em Next.js com export estático, servido por nginx numa VM da Oracle Cloud.
 
-First, run the development server:
+## Desenvolvimento
 
 ```bash
+npm i
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abra http://localhost:3000/pt/ (também `/en/` e `/de/`).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Todo o conteúdo do site (textos, links, projetos, caminhos de imagem) fica em `content/`:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `content/site.ts`: português (fonte principal, define o formato)
+- `content/en.ts`: inglês
+- `content/de.ts`: alemão
 
-## Learn More
+Ao mudar um texto em `site.ts`, mude também em `en.ts` e `de.ts`. O TypeScript acusa erro se a estrutura divergir.
+Na raiz `/`, o nginx redireciona para o idioma do navegador (`deploy/nginx.conf`).
 
-To learn more about Next.js, take a look at the following resources:
+## Assets
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+./scripts/fetch-assets.sh
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Baixa o avatar do GitHub para `public/avatar.jpg` e os cards de cada repositório para `public/projects/`. Rode da raiz do repo.
 
-## Deploy on Vercel
+## Build
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run build
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Gera o site estático em `out/`.
+
+## Deploy na Oracle Cloud
+
+Na VM (Ubuntu):
+
+```bash
+sudo apt update && sudo apt install -y nginx certbot python3-certbot-nginx
+sudo mkdir -p /var/www/portfolio && sudo chown "$USER" /var/www/portfolio
+```
+
+Copie `deploy/nginx.conf` para a VM, troque `seu-dominio.com.br` pelo seu domínio e ative:
+
+```bash
+sudo cp nginx.conf /etc/nginx/sites-available/portfolio
+sudo ln -s /etc/nginx/sites-available/portfolio /etc/nginx/sites-enabled/portfolio
+sudo rm -f /etc/nginx/sites-enabled/default
+sudo nginx -t && sudo systemctl reload nginx
+```
+
+(Ou copie direto para `/etc/nginx/conf.d/portfolio.conf`.)
+
+Libere as portas 80 e 443 em dois lugares:
+
+1. Na Security List da VCN no console da OCI (Ingress, TCP, origem `0.0.0.0/0`).
+2. No firewall da própria VM, pois as imagens Ubuntu da Oracle usam iptables:
+
+```bash
+sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport 80 -j ACCEPT
+sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport 443 -j ACCEPT
+sudo netfilter-persistent save
+```
+
+Com o DNS do domínio apontando para o IP da VM, gere o certificado (o certbot adiciona o bloco 443):
+
+```bash
+sudo certbot --nginx -d seu-dominio.com.br
+```
+
+Da sua máquina, publique:
+
+```bash
+DEPLOY_HOST=usuario@ip ./deploy.sh
+```
+
+O script roda `npm run build` e sincroniza `out/` para `/var/www/portfolio/` via rsync.

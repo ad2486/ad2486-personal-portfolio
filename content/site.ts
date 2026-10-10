@@ -1,0 +1,262 @@
+// Single source of truth for all site copy. pt-BR. Source: user content file + public GitHub data.
+// Do not add claims that are not in those sources.
+
+export type IconKey =
+  | "python" | "javascript" | "typescript" | "rust" | "sql" | "postgresql"
+  | "nodejs" | "fastify" | "prisma" | "zod" | "docker" | "linux" | "arch"
+  | "cachyos" | "fedora" | "debian" | "ubuntu" | "githubactions" | "ssh"
+  | "oracle" | "java" | "react" | "functional" | "github" | "youtube"
+  | "linkedin" | "discordjs" | "vitest" | "openapi" | "email";
+
+export type Link = { label: string; href: string; icon: IconKey; detail?: string };
+
+export type Project = {
+  slug: string;
+  title: string;
+  summary: string;
+  details?: string[];
+  stack: string[];
+  status?: string;
+  repo?: string;
+  /** Path under public/, filled by scripts/fetch-assets.sh. Absent = no image. */
+  image?: string;
+  featured?: boolean;
+};
+
+export type StackGroup = {
+  /** Stable id for layout; never translated. */
+  id: "languages" | "backend" | "infra" | "studying";
+  title: string;
+  items: { label: string; icon: IconKey }[];
+};
+
+export const site = {
+  locale: "pt",
+  name: "Arthur Duarte",
+  role: "Backend e arquitetura de sistemas",
+  location: "Porto Alegre, Brasil",
+  avatar: "/avatar.jpg",
+
+  // Interface labels (not content claims).
+  ui: {
+    skipLink: "Pular para o conteúdo",
+    navLabel: "Principal",
+    menuLabel: "Menu",
+    openMenu: "Abrir menu",
+    closeMenu: "Fechar menu",
+    languageLabel: "Idioma",
+    avatarAlt: "Foto de Arthur Duarte",
+    languagesTitle: "Idiomas",
+    repoPreviewAlt: "Prévia do repositório",
+    stackListLabel: "Tecnologias",
+    viewCode: "Ver código",
+    viewCodeOf: "Ver código de {title} no GitHub",
+    concurrency: "Concorrência",
+    viewChannel: "Ver canal",
+    backToTop: "Voltar ao topo",
+    notFoundTitle: "Página não encontrada.",
+    notFoundCta: "Voltar ao início",
+  },
+
+  meta: {
+    title: "Arthur Duarte | Backend e arquitetura de sistemas",
+    description: "Projeto sistemas e participo da implementação. Entusiasta de Linux e infraestrutura.",
+  },
+
+  nav: [
+    { label: "Sobre", href: "#sobre" },
+    { label: "Stack", href: "#stack" },
+    { label: "Projetos", href: "#projetos" },
+    { label: "Conteúdo", href: "#conteudo" },
+    { label: "Contato", href: "#contato" },
+  ],
+
+  hero: {
+    eyebrow: "Porto Alegre, Brasil",
+    headline: "Backend e arquitetura de sistemas",
+    sub: "Projeto sistemas e participo da implementação. Entusiasta de Linux e infraestrutura.",
+    ctaPrimary: { label: "Ver projetos", href: "#projetos" },
+    ctaSecondary: { label: "GitHub", href: "https://github.com/ad2486" },
+  },
+
+  about: {
+    eyebrow: "Sobre",
+    title: "Do desenho do sistema ao código que roda.",
+    paragraphs: [
+      "Estudante no Colégio Militar de Porto Alegre, com conclusão em 2027.",
+      "Meu foco é backend e arquitetura de sistemas: quero projetar sistemas e também participar da implementação.",
+      "Entusiasta de Linux e infraestrutura.",
+    ],
+    languages: [
+      { name: "Português", level: "Nativo" },
+      { name: "Inglês", level: "C1" },
+      { name: "Alemão", level: "A1, em estudo" },
+    ],
+  },
+
+  stack: {
+    eyebrow: "Stack",
+    title: "Ferramentas do dia a dia",
+    groups: [
+      {
+        id: "languages",
+        title: "Linguagens",
+        items: [
+          { label: "Python", icon: "python" },
+          { label: "JavaScript", icon: "javascript" },
+          { label: "TypeScript", icon: "typescript" },
+          { label: "SQL", icon: "sql" },
+          { label: "Rust", icon: "rust" },
+        ],
+      },
+      {
+        id: "backend",
+        title: "Backend",
+        items: [
+          { label: "Node.js", icon: "nodejs" },
+          { label: "Fastify", icon: "fastify" },
+          { label: "Prisma", icon: "prisma" },
+          { label: "Zod", icon: "zod" },
+          { label: "PostgreSQL", icon: "postgresql" },
+        ],
+      },
+      {
+        id: "infra",
+        title: "Infra",
+        items: [
+          { label: "Arch", icon: "arch" },
+          { label: "CachyOS", icon: "cachyos" },
+          { label: "Fedora", icon: "fedora" },
+          { label: "Debian", icon: "debian" },
+          { label: "Ubuntu Server", icon: "ubuntu" },
+          { label: "Docker", icon: "docker" },
+          { label: "SSH", icon: "ssh" },
+          { label: "Oracle Cloud", icon: "oracle" },
+          { label: "GitHub Actions", icon: "githubactions" },
+        ],
+      },
+      {
+        id: "studying",
+        title: "Estudando",
+        items: [
+          { label: "Java", icon: "java" },
+          { label: "React", icon: "react" },
+          { label: "Programação funcional", icon: "functional" },
+        ],
+      },
+    ] satisfies StackGroup[],
+  },
+
+  projects: {
+    eyebrow: "Projetos",
+    title: "O que estou construindo",
+    items: [
+      {
+        slug: "backend-ticketeira",
+        title: "Sistema de bilheteria de eventos",
+        summary:
+          "Plataforma em que qualquer usuário pode criar eventos, liberar assentos para venda e comprar ingressos.",
+        details: [
+          "Autenticação com JWT + argon2, validação com Zod, rate limiting e documentação OpenAPI.",
+          "A concorrência na venda é tratada com update atômico / SELECT FOR UPDATE para não vender acima da capacidade.",
+          "Limite de eventos por usuário via tiers.",
+        ],
+        stack: ["TypeScript", "Fastify", "PostgreSQL", "Prisma", "Zod", "OpenAPI", "Vitest", "Docker Compose"],
+        status: "Em andamento",
+        repo: "https://github.com/ad2486/backend-ticketeira",
+        image: "/projects/backend-ticketeira.png",
+        featured: true,
+      },
+      {
+        slug: "dev-tool-cli",
+        title: "dev-tool-cli",
+        summary: "CLI que configura ambientes de desenvolvimento.",
+        details: [
+          "Arquitetura modular (cli, config, core, errors, os, providers) baseada em trait Provider e Registry.",
+          "Testes usando fakes. Release automatizado via GitHub Actions.",
+        ],
+        stack: ["Rust", "GitHub Actions"],
+        repo: "https://github.com/ad2486/dev-tool-cli",
+        image: "/projects/dev-tool-cli.png",
+        featured: true,
+      },
+      {
+        slug: "multi-llm-cli",
+        title: "multi-llm-cli",
+        summary: "CLI para trabalhar com múltiplos LLMs.",
+        stack: ["Python"],
+        repo: "https://github.com/ad2486/multi-llm-cli",
+        image: "/projects/multi-llm-cli.png",
+      },
+      {
+        slug: "welcoming-discord-bot",
+        title: "Bot de boas-vindas para Discord",
+        summary:
+          "Dá boas-vindas automáticas a novos membros e atribui cargo automaticamente. Deploy conteinerizado em VM na Oracle Cloud.",
+        stack: ["JavaScript", "discord.js", "Docker", "Oracle Cloud"],
+        repo: "https://github.com/ad2486/welcoming-discord-bot",
+        image: "/projects/welcoming-discord-bot.png",
+      },
+      {
+        slug: "youtube-discord-bot",
+        title: "Bot de notificação do YouTube para Discord",
+        summary: "Anuncia automaticamente no servidor quando sai vídeo novo no canal do YouTube.",
+        stack: ["JavaScript", "discord.js", "Docker"],
+        repo: "https://github.com/ad2486/youtube-discord-bot",
+        image: "/projects/youtube-discord-bot.png",
+      },
+      {
+        slug: "homelab",
+        title: "Homelab",
+        summary:
+          "Servidor Ubuntu Server montado a partir de uma máquina antiga, com IP fixo via Netplan e acesso SSH por chave.",
+        details: ["Usado como laboratório de backend, bancos de dados e Docker."],
+        stack: ["Ubuntu Server", "Netplan", "SSH", "Docker"],
+      },
+    ] satisfies Project[],
+    others: {
+      title: "Outros no GitHub",
+      items: [
+        {
+          title: "data-report-gen",
+          summary: "Pipeline de análise de dados automatizada com integração de IA.",
+          href: "https://github.com/ad2486/data-report-gen",
+        },
+        {
+          title: "reminder-manager",
+          summary: "Gerenciador de lembretes desktop multiplataforma com notificações nativas.",
+          href: "https://github.com/ad2486/reminder-manager",
+        },
+        {
+          title: "simple-ecommerce-store",
+          summary: "API de e-commerce com Flask, SQLAlchemy e SQLite.",
+          href: "https://github.com/ad2486/simple-ecommerce-store",
+        },
+      ],
+    },
+  },
+
+  content: {
+    eyebrow: "Conteúdo",
+    title: "Canal técnico no YouTube",
+    summary: "Explicações de estruturas de dados e problemas do LeetCode.",
+    stats: [
+      { value: "1.000+", label: "inscritos" },
+      { value: "40 mil+", label: "visualizações em um vídeo" },
+    ],
+    channel: { label: "@ad.2486", href: "https://youtube.com/@ad.2486" },
+  },
+
+  contact: {
+    eyebrow: "Contato",
+    title: "Vamos conversar",
+    links: [
+      { label: "E-mail", detail: "arthur.duarte2486@gmail.com", href: "mailto:arthur.duarte2486@gmail.com", icon: "email" },
+      { label: "GitHub", href: "https://github.com/ad2486", icon: "github" },
+      { label: "LinkedIn", href: "https://linkedin.com/in/arthur-duarte-ad2486", icon: "linkedin" },
+      { label: "YouTube", href: "https://youtube.com/@ad.2486", icon: "youtube" },
+    ] satisfies Link[],
+  },
+};
+
+export type Site = typeof site;
