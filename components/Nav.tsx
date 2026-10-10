@@ -68,7 +68,7 @@ export function Nav({ name, nav, ui, locale }: Props) {
     <>
       <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-bg/80 backdrop-blur">
         <nav aria-label={ui.navLabel} className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4 md:px-8">
-          <a href="#top" onClick={close} translate="no" className="font-mono text-sm text-text">
+          <a href="#top" onClick={close} translate="no" className="-my-2 py-2 font-mono text-sm text-text">
             {name}
           </a>
           <ul className="ml-auto mr-6 hidden items-center gap-6 md:flex">

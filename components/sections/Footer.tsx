@@ -8,8 +8,9 @@ export async function Footer() {
         <p>
           © {new Date().getFullYear()} {site.name} · {site.location}
         </p>
-        <a href="#top" className="link-draw transition-colors duration-300 ease-fluid hover:text-text">
-          {site.ui.backToTop}
+        {/* Padding sits on the link (tap area); the underline sits on the text span. */}
+        <a href="#top" className="group -my-2 w-fit py-2 transition-colors duration-300 ease-fluid hover:text-text">
+          <span className="link-draw">{site.ui.backToTop}</span>
         </a>
       </div>
     </footer>

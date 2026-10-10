@@ -40,7 +40,7 @@ function RepoLink({ p, ui, className = "" }: { p: Project; ui: Site["ui"]; class
       target="_blank"
       rel="noopener noreferrer"
       aria-label={ui.viewCodeOf.replace("{title}", p.title)}
-      className={`group inline-flex w-fit items-center gap-1.5 text-sm font-medium text-text transition-colors duration-300 ease-fluid hover:text-accent ${className}`}
+      className={`group -my-2 inline-flex w-fit items-center gap-1.5 py-2 text-sm font-medium text-text transition-colors duration-300 ease-fluid hover:text-accent ${className}`}
     >
       <span className="link-draw">{ui.viewCode}</span>
       <ArrowUpRight size={14} aria-hidden />
