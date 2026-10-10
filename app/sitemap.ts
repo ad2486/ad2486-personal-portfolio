@@ -5,7 +5,10 @@ export const dynamic = "force-static";
 
 // One entry per locale, each listing the others as alternates (hreflang).
 export default function sitemap(): MetadataRoute.Sitemap {
-  const languages = Object.fromEntries(locales.map((l) => [htmlLang[l], `${siteUrl}/${l}/`]));
+  const languages = {
+    ...Object.fromEntries(locales.map((l) => [htmlLang[l], `${siteUrl}/${l}/`])),
+    "x-default": `${siteUrl}/pt/`,
+  };
   return locales.map((l) => ({
     url: `${siteUrl}/${l}/`,
     alternates: { languages },

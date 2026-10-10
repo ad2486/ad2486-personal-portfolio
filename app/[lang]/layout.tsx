@@ -19,7 +19,8 @@ export async function generateMetadata(): Promise<Metadata> {
     icons: { icon: "/favicon.svg" },
     alternates: {
       canonical: `/${locale}/`,
-      languages: Object.fromEntries(locales.map((l) => [htmlLang[l], `/${l}/`])),
+      // x-default: crawlers send no Accept-Language, so they hit the / redirect blind.
+      languages: { ...Object.fromEntries(locales.map((l) => [htmlLang[l], `/${l}/`])), "x-default": "/pt/" },
     },
     openGraph: {
       title: site.name,
