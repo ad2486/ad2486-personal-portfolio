@@ -10,7 +10,7 @@ type Props = {
   as?: "div" | "li" | "section" | "article";
 };
 
-// Heavy fade-up on viewport entry. Static under reduced motion.
+// Short fade-up on viewport entry. Use sparingly: hero and project cards only. Static under reduced motion.
 export function Reveal({ children, className, delay = 0, as = "div" }: Props) {
   const reduce = useReducedMotion();
   const Tag = motion[as];
@@ -18,10 +18,10 @@ export function Reveal({ children, className, delay = 0, as = "div" }: Props) {
     <Tag
       className={className}
       data-reveal=""
-      initial={reduce ? false : { opacity: 0, y: 64 }}
+      initial={reduce ? false : { opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.9, delay, ease: [0.32, 0.72, 0, 1] }}
+      transition={{ duration: 0.6, delay, ease: [0.32, 0.72, 0, 1] }}
     >
       {children}
     </Tag>

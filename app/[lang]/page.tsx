@@ -3,6 +3,7 @@ import { Hero } from "@/components/sections/Hero";
 import { Sobre } from "@/components/sections/Sobre";
 import { Stack } from "@/components/sections/Stack";
 import { Projetos } from "@/components/sections/Projetos";
+import { Fluxo } from "@/components/sections/Fluxo";
 import { Conteudo } from "@/components/sections/Conteudo";
 import { Contato } from "@/components/sections/Contato";
 import { Footer } from "@/components/sections/Footer";
@@ -18,6 +19,7 @@ export default async function Home() {
         <Sobre />
         <Stack />
         <Projetos />
+        <Fluxo />
         <Conteudo />
         <Contato />
       </main>

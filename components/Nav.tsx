@@ -12,7 +12,7 @@ type Props = { name: string; nav: Site["nav"]; ui: Site["ui"]; locale: Locale };
 // Plain links to each locale's static page; the current one is marked, not linked away.
 function LanguageSwitch({ locale, ui, className = "" }: { locale: Locale; ui: Site["ui"]; className?: string }) {
   return (
-    <ul aria-label={ui.languageLabel} className={`flex items-center gap-1 font-mono text-xs ${className}`}>
+    <ul aria-label={ui.languageLabel} className={`flex items-center gap-3 font-mono text-xs ${className}`}>
       {locales.map((l) => (
         <li key={l}>
           <a
@@ -20,8 +20,8 @@ function LanguageSwitch({ locale, ui, className = "" }: { locale: Locale; ui: Si
             hrefLang={l}
             lang={l}
             aria-current={l === locale ? "true" : undefined}
-            className={`flex h-8 min-w-8 items-center justify-center rounded-full px-2 transition-colors duration-500 ease-fluid ${
-              l === locale ? "bg-white/10 text-text" : "text-muted hover:text-text"
+            className={`flex h-8 items-center underline-offset-4 transition-colors duration-300 ease-fluid ${
+              l === locale ? "text-text underline" : "text-muted hover:text-text"
             }`}
           >
             {localeLabel[l].short}
@@ -66,20 +66,17 @@ export function Nav({ name, nav, ui, locale }: Props) {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-6 z-50 flex justify-center px-4">
-        <nav
-          aria-label={ui.navLabel}
-          className="flex h-14 w-max items-center gap-6 rounded-full border border-line bg-bg/60 pl-5 pr-2 backdrop-blur-xl md:gap-8 md:pr-5"
-        >
-          <a href="#top" onClick={close} translate="no" className="text-sm font-medium tracking-tight text-text">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-bg/80 backdrop-blur">
+        <nav aria-label={ui.navLabel} className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4 md:px-8">
+          <a href="#top" onClick={close} translate="no" className="font-mono text-sm text-text">
             {name}
           </a>
-          <ul className="hidden items-center gap-6 md:flex">
+          <ul className="ml-auto mr-6 hidden items-center gap-6 md:flex">
             {nav.map((item) => (
               <li key={item.href}>
                 <a
                   href={item.href}
-                  className="text-sm text-muted transition-colors duration-500 ease-fluid hover:text-text"
+                  className="link-draw text-sm text-muted transition-colors duration-300 ease-fluid hover:text-text"
                 >
                   {item.label}
                 </a>
@@ -94,7 +91,7 @@ export function Nav({ name, nav, ui, locale }: Props) {
             aria-label={open ? ui.closeMenu : ui.openMenu}
             aria-expanded={open}
             aria-controls="mobile-menu"
-            className="relative flex h-10 w-10 items-center justify-center rounded-full bg-white/[0.05] transition-colors duration-500 ease-fluid hover:bg-white/[0.1] md:hidden"
+            className="relative -mr-2 flex h-10 w-10 items-center justify-center rounded-md transition-colors duration-300 ease-fluid hover:bg-surface md:hidden"
           >
             <span
               className={`absolute h-px w-4 bg-text transition-transform duration-500 ease-fluid ${open ? "rotate-45" : "-translate-y-[3px]"}`}
@@ -113,7 +110,7 @@ export function Nav({ name, nav, ui, locale }: Props) {
             role="dialog"
             aria-modal="true"
             aria-label={ui.menuLabel}
-            className="fixed inset-0 z-40 flex flex-col items-start justify-center gap-12 overscroll-contain bg-bg/80 px-8 backdrop-blur-3xl md:hidden"
+            className="fixed inset-0 z-40 flex flex-col items-start justify-center gap-12 overscroll-contain bg-bg px-8 md:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -123,11 +120,11 @@ export function Nav({ name, nav, ui, locale }: Props) {
               {nav.map((item, i) => (
                 <motion.li
                   key={item.href}
-                  initial={reduce ? false : { opacity: 0, y: 24 }}
+                  initial={reduce ? false : { opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: reduce ? 0 : 0.6, delay: reduce ? 0 : 0.1 + i * 0.05, ease }}
+                  transition={{ duration: reduce ? 0 : 0.4, delay: reduce ? 0 : 0.05 + i * 0.04, ease }}
                 >
-                  <a ref={i === 0 ? firstLinkRef : undefined} href={item.href} onClick={close} className="text-4xl font-medium tracking-tighter text-text">
+                  <a ref={i === 0 ? firstLinkRef : undefined} href={item.href} onClick={close} className="text-3xl font-medium tracking-tight text-text">
                     {item.label}
                   </a>
                 </motion.li>

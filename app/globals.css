@@ -1,15 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #0b0c0e;
-  --color-surface: #131418;
-  --color-surface-2: #1a1b20;
-  --color-line: rgb(255 255 255 / 0.08);
-  --color-text: #ededef;
-  --color-muted: #9a9ba1;
-  --color-accent: #8fb3ff;
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Vantablack: absolute black that swallows everything; only light reveals form.
+     One faint ice accent, reserved for focus, state and the deploy diagram. */
+  --color-bg: #000000;
+  --color-surface: #060606;
+  --color-surface-2: #0c0c0c;
+  --color-line: rgb(255 255 255 / 0.07);
+  --color-text: #f5f5f5;
+  --color-muted: #8a8a8a;
+  --color-accent: #b8c7d9;
+  --font-sans: var(--font-plex-sans);
+  --font-mono: var(--font-plex-mono);
   --ease-fluid: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
@@ -35,7 +37,7 @@ body {
 }
 
 ::selection {
-  background: rgb(143 179 255 / 0.3);
+  background: rgb(184 199 217 / 0.25);
 }
 
 :focus-visible {
@@ -43,18 +45,70 @@ body {
   outline-offset: 3px;
 }
 
-/* Grain: fixed, non-interactive layer so scrolling never repaints it */
-body::after {
+/* Spotlight: a soft light that follows the pointer and reveals the panel border.
+   --x/--y are set by SpotlightPanel; only opacity animates. */
+.spotlight {
+  position: relative;
+}
+.spotlight::before,
+.spotlight::after {
   content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 60;
+  position: absolute;
   pointer-events: none;
-  opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-fluid);
+}
+.spotlight::before {
+  inset: -1px;
+  padding: 1px;
+  background: radial-gradient(260px circle at var(--x, 50%) var(--y, 50%), rgb(184 199 217 / 0.5), transparent 65%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+.spotlight::after {
+  inset: 0;
+  background: radial-gradient(420px circle at var(--x, 50%) var(--y, 50%), rgb(255 255 255 / 0.035), transparent 60%);
+}
+.spotlight:hover::before,
+.spotlight:hover::after {
+  opacity: 1;
+}
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .spotlight::before,
+  .spotlight::after {
+    display: none;
+  }
+}
+
+/* Underline that draws in from the left on hover/focus. Transform only. */
+.link-draw {
+  position: relative;
+}
+.link-draw::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s var(--ease-fluid);
+}
+.link-draw:hover::after,
+.link-draw:focus-visible::after,
+.group:hover .link-draw::after,
+.group:focus-visible .link-draw::after {
+  transform: scaleX(1);
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .link-draw::after {
+    transition: none;
+  }
   html {
     scroll-behavior: auto;
   }

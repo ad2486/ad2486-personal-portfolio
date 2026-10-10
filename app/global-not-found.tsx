@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Button } from "@/components/Button";
 import { locales, localeLabel } from "@/content/locales";
 import { site } from "@/content/site";
-import { geistMono, geistSans } from "./fonts";
+import { fontMono, fontSans } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 // Unmatched URLs have no locale, so this page is pt-BR with links to every language.
 export default function GlobalNotFound() {
   return (
-    <html lang="pt-BR" className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+    <html lang="pt-BR" className={`${fontSans.variable} ${fontMono.variable} antialiased`}>
       <body className="font-sans">
         <main className="mx-auto flex min-h-[100dvh] max-w-3xl flex-col items-start justify-center gap-6 px-4">
           <p className="font-mono text-sm text-muted">404</p>

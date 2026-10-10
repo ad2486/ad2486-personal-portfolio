@@ -11,7 +11,7 @@ npm run dev
 
 Abra http://localhost:3000/pt/ (também `/en/` e `/de/`).
 
-Todo o conteúdo do site (textos, links, projetos, caminhos de imagem) fica em `content/`:
+Todo o conteúdo do site (textos, links, projetos) fica em `content/`:
 
 - `content/site.ts`: português (fonte principal, define o formato)
 - `content/en.ts`: inglês
@@ -26,7 +26,7 @@ Na raiz `/`, o nginx redireciona para o idioma do navegador (`deploy/nginx.conf`
 ./scripts/fetch-assets.sh
 ```
 
-Baixa o avatar do GitHub para `public/avatar.jpg` e os cards de cada repositório para `public/projects/`. Rode da raiz do repo.
+Baixa o avatar do GitHub para `public/avatar.jpg`. Rode da raiz do repo.
 
 ## Build
 

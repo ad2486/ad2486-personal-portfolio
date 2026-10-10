@@ -18,8 +18,6 @@ export type Project = {
   stack: string[];
   status?: string;
   repo?: string;
-  /** Path under public/, filled by scripts/fetch-assets.sh. Absent = no image. */
-  image?: string;
   featured?: boolean;
 };
 
@@ -47,11 +45,9 @@ export const site = {
     languageLabel: "Idioma",
     avatarAlt: "Foto de Arthur Duarte",
     languagesTitle: "Idiomas",
-    repoPreviewAlt: "Prévia do repositório",
     stackListLabel: "Tecnologias",
     viewCode: "Ver código",
     viewCodeOf: "Ver código de {title} no GitHub",
-    concurrency: "Concorrência",
     viewChannel: "Ver canal",
     backToTop: "Voltar ao topo",
     notFoundTitle: "Página não encontrada.",
@@ -72,7 +68,6 @@ export const site = {
   ],
 
   hero: {
-    eyebrow: "Porto Alegre, Brasil",
     headline: "Backend e arquitetura de sistemas",
     sub: "Projeto sistemas e participo da implementação. Entusiasta de Linux e infraestrutura.",
     ctaPrimary: { label: "Ver projetos", href: "#projetos" },
@@ -80,8 +75,7 @@ export const site = {
   },
 
   about: {
-    eyebrow: "Sobre",
-    title: "Do desenho do sistema ao código que roda.",
+    title: "Sobre",
     paragraphs: [
       "Estudante no Colégio Militar de Porto Alegre, com conclusão em 2027.",
       "Meu foco é backend e arquitetura de sistemas: quero projetar sistemas e também participar da implementação.",
@@ -95,8 +89,7 @@ export const site = {
   },
 
   stack: {
-    eyebrow: "Stack",
-    title: "Ferramentas do dia a dia",
+    title: "Stack",
     groups: [
       {
         id: "languages",
@@ -148,8 +141,7 @@ export const site = {
   },
 
   projects: {
-    eyebrow: "Projetos",
-    title: "O que estou construindo",
+    title: "Projetos",
     items: [
       {
         slug: "backend-ticketeira",
@@ -164,7 +156,6 @@ export const site = {
         stack: ["TypeScript", "Fastify", "PostgreSQL", "Prisma", "Zod", "OpenAPI", "Docker Compose"],
         status: "Em andamento",
         repo: "https://github.com/ad2486/backend-ticketeira",
-        image: "/projects/backend-ticketeira.png",
         featured: true,
       },
       {
@@ -179,7 +170,6 @@ export const site = {
         ],
         stack: ["Rust", "GitHub Actions"],
         repo: "https://github.com/ad2486/dev-tool-cli",
-        image: "/projects/dev-tool-cli.png",
         featured: true,
       },
       {
@@ -192,7 +182,6 @@ export const site = {
         ],
         stack: ["Python", "uv"],
         repo: "https://github.com/ad2486/multi-llm-cli",
-        image: "/projects/multi-llm-cli.png",
       },
       {
         slug: "welcoming-discord-bot",
@@ -201,7 +190,6 @@ export const site = {
           "Dá boas-vindas automáticas a novos membros e atribui cargo automaticamente. Deploy conteinerizado em VM na Oracle Cloud.",
         stack: ["JavaScript", "discord.js", "Docker", "Oracle Cloud"],
         repo: "https://github.com/ad2486/welcoming-discord-bot",
-        image: "/projects/welcoming-discord-bot.png",
       },
       {
         slug: "youtube-discord-bot",
@@ -213,7 +201,6 @@ export const site = {
         ],
         stack: ["JavaScript", "discord.js", "Docker"],
         repo: "https://github.com/ad2486/youtube-discord-bot",
-        image: "/projects/youtube-discord-bot.png",
       },
       {
         slug: "homelab",
@@ -230,7 +217,6 @@ export const site = {
         details: ["Deploy via GitHub Actions. A lista de projetos é atualizada toda semana pelo Claude."],
         stack: ["TypeScript", "Next.js", "nginx", "Oracle Cloud", "GitHub Actions"],
         repo: "https://github.com/ad2486/ad2486-personal-portfolio",
-        image: "/projects/ad2486-personal-portfolio.png",
       },
     ] satisfies Project[],
     others: {
@@ -255,8 +241,21 @@ export const site = {
     },
   },
 
+  flow: {
+    title: "Como este site chega até você",
+    summary: "Sem plataforma pronta: este é o caminho de um commit até o seu navegador, montado e operado por mim.",
+    steps: [
+      { label: "git push", detail: "Commit na branch main do GitHub." },
+      { label: "GitHub Actions", detail: "npm ci e next build geram o site estático em out/." },
+      { label: "rsync via SSH", detail: "Envia só o que mudou, com um usuário de deploy sem sudo." },
+      { label: "nginx", detail: "VM Ubuntu na Oracle Cloud, com gzip e cache longo nos assets." },
+      { label: "HTTPS", detail: "Certificado Let's Encrypt, renovado pelo certbot." },
+      { label: "Você", detail: "A raiz redireciona para /pt/, /en/ ou /de/ conforme o idioma do navegador." },
+    ],
+    weekly: "Toda segunda, um workflow com o Claude lê meus repositórios com a topic portfolio e abre um PR atualizando os projetos nos três idiomas. Eu reviso e faço o merge; o deploy roda sozinho.",
+  },
+
   content: {
-    eyebrow: "Conteúdo",
     title: "Canal técnico no YouTube",
     summary: "Explicações de estruturas de dados e problemas do LeetCode.",
     stats: [
@@ -267,8 +266,7 @@ export const site = {
   },
 
   contact: {
-    eyebrow: "Contato",
-    title: "Vamos conversar",
+    title: "Contato",
     links: [
       { label: "E-mail", detail: "arthur.duarte2486@gmail.com", href: "mailto:arthur.duarte2486@gmail.com", icon: "email" },
       { label: "GitHub", href: "https://github.com/ad2486", icon: "github" },

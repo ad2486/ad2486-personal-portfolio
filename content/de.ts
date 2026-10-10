@@ -16,11 +16,9 @@ export const site: Site = {
     languageLabel: "Sprache",
     avatarAlt: "Foto von Arthur Duarte",
     languagesTitle: "Sprachen",
-    repoPreviewAlt: "Vorschau des Repositorys",
     stackListLabel: "Technologien",
     viewCode: "Code ansehen",
     viewCodeOf: "Code von {title} auf GitHub ansehen",
-    concurrency: "Nebenläufigkeit",
     viewChannel: "Kanal ansehen",
     backToTop: "Zurück nach oben",
     notFoundTitle: "Seite nicht gefunden.",
@@ -41,7 +39,6 @@ export const site: Site = {
   ],
 
   hero: {
-    eyebrow: "Porto Alegre, Brasilien",
     headline: "Backend und Systemarchitektur",
     sub: "Ich entwerfe Systeme und wirke an ihrer Umsetzung mit. Begeistert von Linux und Infrastruktur.",
     ctaPrimary: { label: "Projekte ansehen", href: "#projetos" },
@@ -49,8 +46,7 @@ export const site: Site = {
   },
 
   about: {
-    eyebrow: "Über mich",
-    title: "Vom Systementwurf bis zum laufenden Code.",
+    title: "Über mich",
     paragraphs: [
       "Schüler am Colégio Militar de Porto Alegre (Militärgymnasium), Abschluss 2027.",
       "Mein Schwerpunkt sind Backend und Systemarchitektur: Ich möchte Systeme entwerfen und auch an ihrer Umsetzung mitwirken.",
@@ -64,8 +60,7 @@ export const site: Site = {
   },
 
   stack: {
-    eyebrow: "Stack",
-    title: "Werkzeuge für den Alltag",
+    title: "Stack",
     groups: [
       {
         id: "languages",
@@ -117,8 +112,7 @@ export const site: Site = {
   },
 
   projects: {
-    eyebrow: "Projekte",
-    title: "Woran ich arbeite",
+    title: "Projekte",
     items: [
       {
         slug: "backend-ticketeira",
@@ -133,7 +127,6 @@ export const site: Site = {
         stack: ["TypeScript", "Fastify", "PostgreSQL", "Prisma", "Zod", "OpenAPI", "Docker Compose"],
         status: "In Arbeit",
         repo: "https://github.com/ad2486/backend-ticketeira",
-        image: "/projects/backend-ticketeira.png",
         featured: true,
       },
       {
@@ -148,7 +141,6 @@ export const site: Site = {
         ],
         stack: ["Rust", "GitHub Actions"],
         repo: "https://github.com/ad2486/dev-tool-cli",
-        image: "/projects/dev-tool-cli.png",
         featured: true,
       },
       {
@@ -161,7 +153,6 @@ export const site: Site = {
         ],
         stack: ["Python", "uv"],
         repo: "https://github.com/ad2486/multi-llm-cli",
-        image: "/projects/multi-llm-cli.png",
       },
       {
         slug: "welcoming-discord-bot",
@@ -170,7 +161,6 @@ export const site: Site = {
           "Begrüßt neue Mitglieder automatisch und weist ihnen automatisch eine Rolle zu. Containerisiertes Deployment auf einer VM in der Oracle Cloud.",
         stack: ["JavaScript", "discord.js", "Docker", "Oracle Cloud"],
         repo: "https://github.com/ad2486/welcoming-discord-bot",
-        image: "/projects/welcoming-discord-bot.png",
       },
       {
         slug: "youtube-discord-bot",
@@ -182,7 +172,6 @@ export const site: Site = {
         ],
         stack: ["JavaScript", "discord.js", "Docker"],
         repo: "https://github.com/ad2486/youtube-discord-bot",
-        image: "/projects/youtube-discord-bot.png",
       },
       {
         slug: "homelab",
@@ -199,7 +188,6 @@ export const site: Site = {
         details: ["Deployment über GitHub Actions. Die Projektliste wird wöchentlich von Claude aktualisiert."],
         stack: ["TypeScript", "Next.js", "nginx", "Oracle Cloud", "GitHub Actions"],
         repo: "https://github.com/ad2486/ad2486-personal-portfolio",
-        image: "/projects/ad2486-personal-portfolio.png",
       },
     ],
     others: {
@@ -224,8 +212,21 @@ export const site: Site = {
     },
   },
 
+  flow: {
+    title: "Wie diese Seite zu dir kommt",
+    summary: "Keine fertige Plattform: der Weg von einem Commit bis zu deinem Browser, von mir aufgebaut und betrieben.",
+    steps: [
+      { label: "git push", detail: "Commit auf den main-Branch bei GitHub." },
+      { label: "GitHub Actions", detail: "npm ci und next build erzeugen die statische Seite in out/." },
+      { label: "rsync über SSH", detail: "Überträgt nur Änderungen, mit einem Deploy-Benutzer ohne sudo." },
+      { label: "nginx", detail: "Ubuntu-VM in der Oracle Cloud, mit gzip und langem Caching für Assets." },
+      { label: "HTTPS", detail: "Let's-Encrypt-Zertifikat, erneuert durch certbot." },
+      { label: "Du", detail: "Die Startseite leitet je nach Browsersprache auf /pt/, /en/ oder /de/ weiter." },
+    ],
+    weekly: "Jeden Montag liest ein Workflow mit Claude meine Repositories mit dem Topic portfolio und öffnet einen PR, der die Projekte in allen drei Sprachen aktualisiert. Ich prüfe und merge; das Deployment läuft automatisch.",
+  },
+
   content: {
-    eyebrow: "Inhalte",
     title: "Technischer YouTube-Kanal",
     summary: "Erklärungen zu Datenstrukturen und LeetCode-Aufgaben.",
     stats: [
@@ -236,8 +237,7 @@ export const site: Site = {
   },
 
   contact: {
-    eyebrow: "Kontakt",
-    title: "Ins Gespräch kommen",
+    title: "Kontakt",
     links: [
       { label: "E-Mail", detail: "arthur.duarte2486@gmail.com", href: "mailto:arthur.duarte2486@gmail.com", icon: "email" },
       { label: "GitHub", href: "https://github.com/ad2486", icon: "github" },

@@ -16,11 +16,9 @@ export const site: Site = {
     languageLabel: "Language",
     avatarAlt: "Photo of Arthur Duarte",
     languagesTitle: "Languages",
-    repoPreviewAlt: "Repository preview",
     stackListLabel: "Technologies",
     viewCode: "View code",
     viewCodeOf: "View code of {title} on GitHub",
-    concurrency: "Concurrency",
     viewChannel: "View channel",
     backToTop: "Back to top",
     notFoundTitle: "Page not found.",
@@ -41,7 +39,6 @@ export const site: Site = {
   ],
 
   hero: {
-    eyebrow: "Porto Alegre, Brazil",
     headline: "Backend and systems architecture",
     sub: "I design systems and take part in implementing them. Linux and infrastructure enthusiast.",
     ctaPrimary: { label: "View projects", href: "#projetos" },
@@ -49,8 +46,7 @@ export const site: Site = {
   },
 
   about: {
-    eyebrow: "About",
-    title: "From system design to running code.",
+    title: "About",
     paragraphs: [
       "Student at Colégio Militar de Porto Alegre (military high school), graduating in 2027.",
       "My focus is backend and systems architecture: I want to design systems and also take part in implementing them.",
@@ -64,8 +60,7 @@ export const site: Site = {
   },
 
   stack: {
-    eyebrow: "Stack",
-    title: "Everyday tools",
+    title: "Stack",
     groups: [
       {
         id: "languages",
@@ -117,8 +112,7 @@ export const site: Site = {
   },
 
   projects: {
-    eyebrow: "Projects",
-    title: "What I'm building",
+    title: "Projects",
     items: [
       {
         slug: "backend-ticketeira",
@@ -133,7 +127,6 @@ export const site: Site = {
         stack: ["TypeScript", "Fastify", "PostgreSQL", "Prisma", "Zod", "OpenAPI", "Docker Compose"],
         status: "In progress",
         repo: "https://github.com/ad2486/backend-ticketeira",
-        image: "/projects/backend-ticketeira.png",
         featured: true,
       },
       {
@@ -148,7 +141,6 @@ export const site: Site = {
         ],
         stack: ["Rust", "GitHub Actions"],
         repo: "https://github.com/ad2486/dev-tool-cli",
-        image: "/projects/dev-tool-cli.png",
         featured: true,
       },
       {
@@ -161,7 +153,6 @@ export const site: Site = {
         ],
         stack: ["Python", "uv"],
         repo: "https://github.com/ad2486/multi-llm-cli",
-        image: "/projects/multi-llm-cli.png",
       },
       {
         slug: "welcoming-discord-bot",
@@ -170,7 +161,6 @@ export const site: Site = {
           "Automatically welcomes new members and assigns them a role. Containerized deployment on an Oracle Cloud VM.",
         stack: ["JavaScript", "discord.js", "Docker", "Oracle Cloud"],
         repo: "https://github.com/ad2486/welcoming-discord-bot",
-        image: "/projects/welcoming-discord-bot.png",
       },
       {
         slug: "youtube-discord-bot",
@@ -182,7 +172,6 @@ export const site: Site = {
         ],
         stack: ["JavaScript", "discord.js", "Docker"],
         repo: "https://github.com/ad2486/youtube-discord-bot",
-        image: "/projects/youtube-discord-bot.png",
       },
       {
         slug: "homelab",
@@ -199,7 +188,6 @@ export const site: Site = {
         details: ["Deployed via GitHub Actions. The project list is updated weekly by Claude."],
         stack: ["TypeScript", "Next.js", "nginx", "Oracle Cloud", "GitHub Actions"],
         repo: "https://github.com/ad2486/ad2486-personal-portfolio",
-        image: "/projects/ad2486-personal-portfolio.png",
       },
     ],
     others: {
@@ -224,8 +212,21 @@ export const site: Site = {
     },
   },
 
+  flow: {
+    title: "How this site reaches you",
+    summary: "No hosting platform: this is the path from a commit to your browser, built and run by me.",
+    steps: [
+      { label: "git push", detail: "Commit to the main branch on GitHub." },
+      { label: "GitHub Actions", detail: "npm ci and next build produce the static site in out/." },
+      { label: "rsync over SSH", detail: "Sends only what changed, as a deploy user without sudo." },
+      { label: "nginx", detail: "Ubuntu VM on Oracle Cloud, with gzip and long caching for assets." },
+      { label: "HTTPS", detail: "Let's Encrypt certificate, renewed by certbot." },
+      { label: "You", detail: "The root redirects to /pt/, /en/ or /de/ based on your browser language." },
+    ],
+    weekly: "Every Monday, a workflow with Claude reads my repositories tagged portfolio and opens a PR updating the projects in all three languages. I review and merge; the deploy runs by itself.",
+  },
+
   content: {
-    eyebrow: "Content",
     title: "Technical YouTube channel",
     summary: "Explanations of data structures and LeetCode problems.",
     stats: [
@@ -236,8 +237,7 @@ export const site: Site = {
   },
 
   contact: {
-    eyebrow: "Contact",
-    title: "Let's talk",
+    title: "Contact",
     links: [
       { label: "Email", detail: "arthur.duarte2486@gmail.com", href: "mailto:arthur.duarte2486@gmail.com", icon: "email" },
       { label: "GitHub", href: "https://github.com/ad2486", icon: "github" },

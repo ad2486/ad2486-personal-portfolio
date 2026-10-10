@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { geistMono, geistSans } from "../fonts";
+import { fontMono, fontSans } from "../fonts";
 import { getLocale, getSite } from "@/content/i18n";
 import { htmlLang, locales, ogLocale, siteUrl } from "@/content/locales";
 import "../globals.css";
@@ -32,14 +32,14 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export const viewport: Viewport = { themeColor: "#0b0c0e" };
+export const viewport: Viewport = { themeColor: "#000000" };
 
 export default async function RootLayout({ children }: LayoutProps<"/[lang]">) {
   const [site, locale] = await Promise.all([getSite(), getLocale()]);
   return (
     <html
       lang={htmlLang[locale]}
-      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      className={`${fontSans.variable} ${fontMono.variable} antialiased`}
     >
       <body className="min-h-[100dvh] font-sans">
         {/* Without JS, Reveal never runs: show its content instead of a blank page. */}
