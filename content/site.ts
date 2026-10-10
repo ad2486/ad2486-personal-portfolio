@@ -7,7 +7,7 @@ export type IconKey =
   | "cachyos" | "fedora" | "debian" | "ubuntu" | "githubactions" | "ssh"
   | "oracle" | "java" | "react" | "functional" | "github" | "youtube"
   | "linkedin" | "discordjs" | "vitest" | "openapi" | "email"
-  | "fastapi" | "mysql" | "aws" | "nginx";
+  | "fastapi" | "mysql" | "aws" | "nginx" | "sqlalchemy" | "rocky";
 
 /** E-mail stays split so the address never appears whole in the static HTML; EmailLink joins it in the browser. */
 export type Link = { label: string; icon: IconKey } & (
@@ -115,6 +115,7 @@ export const site = {
           { label: "Fastify", icon: "fastify" },
           { label: "FastAPI", icon: "fastapi" },
           { label: "Prisma", icon: "prisma" },
+          { label: "SQLAlchemy", icon: "sqlalchemy" },
           { label: "Zod", icon: "zod" },
           { label: "PostgreSQL", icon: "postgresql" },
           { label: "MySQL", icon: "mysql" },
@@ -129,6 +130,7 @@ export const site = {
           { label: "Fedora", icon: "fedora" },
           { label: "Debian", icon: "debian" },
           { label: "Ubuntu Server", icon: "ubuntu" },
+          { label: "Rocky Linux", icon: "rocky" },
           { label: "Docker", icon: "docker" },
           { label: "nginx", icon: "nginx" },
           { label: "SSH", icon: "ssh" },
