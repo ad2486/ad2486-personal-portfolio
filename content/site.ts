@@ -5,7 +5,7 @@ export type IconKey =
   | "python" | "javascript" | "typescript" | "rust" | "sql" | "postgresql"
   | "nodejs" | "fastify" | "prisma" | "zod" | "docker" | "linux"
   | "debian" | "ubuntu" | "githubactions" | "ssh"
-  | "oracle" | "java" | "react" | "functional" | "github" | "youtube"
+  | "oracle" | "java" | "react" | "elixir" | "github" | "youtube"
   | "linkedin" | "discordjs" | "vitest" | "openapi" | "email"
   | "fastapi" | "mysql" | "aws" | "nginx" | "sqlalchemy" | "rocky";
 
@@ -142,7 +142,7 @@ export const site = {
         items: [
           { label: "Java", icon: "java" },
           { label: "React", icon: "react" },
-          { label: "Programação funcional", icon: "functional" },
+          { label: "Elixir", icon: "elixir" },
         ],
       },
     ] satisfies StackGroup[],

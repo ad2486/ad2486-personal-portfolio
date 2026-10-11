@@ -108,7 +108,7 @@ export const site: Site = {
         items: [
           { label: "Java", icon: "java" },
           { label: "React", icon: "react" },
-          { label: "Functional programming", icon: "functional" },
+          { label: "Elixir", icon: "elixir" },
         ],
       },
     ],
