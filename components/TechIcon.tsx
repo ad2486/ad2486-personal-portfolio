@@ -27,6 +27,7 @@ import {
   siZod,
 } from "simple-icons";
 import {
+  BooksIcon as Books,
   CloudIcon as Cloud,
   DatabaseIcon as Database,
   EnvelopeSimpleIcon as EnvelopeSimple,
@@ -79,6 +80,7 @@ const fallback = {
   oracle: Cloud,
   linkedin: LinkedinLogo,
   email: EnvelopeSimple,
+  books: Books,
 };
 
 type Props = { icon: IconKey; size?: number; className?: string };

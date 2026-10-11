@@ -45,6 +45,12 @@ sudo apt update && sudo apt install -y nginx certbot python3-certbot-nginx
 sudo mkdir -p /var/www/portfolio && sudo chown "$USER" /var/www/portfolio
 ```
 
+Copie `deploy/limits.conf` (rate limit e IP real atrás do Cloudflare, compartilhado com a estante) uma única vez:
+
+```bash
+sudo cp limits.conf /etc/nginx/conf.d/limits.conf
+```
+
 Copie `deploy/nginx.conf` para a VM, troque `seu-dominio.com.br` pelo seu domínio e ative:
 
 ```bash

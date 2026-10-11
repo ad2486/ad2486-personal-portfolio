@@ -36,6 +36,7 @@ export const site: Site = {
     { label: "Projects", href: "#projetos" },
     { label: "Content", href: "#conteudo" },
     { label: "Contact", href: "#contato" },
+    { label: "Bookshelf", href: "https://estante.arthur-duarte-portfolio.com.br/" },
   ],
 
   hero: {
@@ -246,6 +247,7 @@ export const site: Site = {
       { label: "GitHub", href: "https://github.com/ad2486", icon: "github" },
       { label: "LinkedIn", href: "https://linkedin.com/in/arthur-duarte-ad2486", icon: "linkedin" },
       { label: "YouTube", href: "https://youtube.com/@ad.2486", icon: "youtube" },
+      { label: "Bookshelf: posts and books (in Portuguese)", href: "https://estante.arthur-duarte-portfolio.com.br/", icon: "books" },
     ],
   },
 };

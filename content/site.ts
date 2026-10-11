@@ -7,7 +7,7 @@ export type IconKey =
   | "debian" | "ubuntu" | "githubactions" | "ssh"
   | "oracle" | "java" | "react" | "elixir" | "github" | "youtube"
   | "linkedin" | "discordjs" | "vitest" | "openapi" | "email"
-  | "fastapi" | "mysql" | "aws" | "nginx" | "sqlalchemy" | "rocky";
+  | "fastapi" | "mysql" | "aws" | "nginx" | "sqlalchemy" | "rocky" | "books";
 
 /** E-mail stays split so the address never appears whole in the static HTML; EmailLink joins it in the browser. */
 export type Link = { label: string; icon: IconKey } & (
@@ -70,6 +70,7 @@ export const site = {
     { label: "Projetos", href: "#projetos" },
     { label: "Conteúdo", href: "#conteudo" },
     { label: "Contato", href: "#contato" },
+    { label: "Estante", href: "https://estante.arthur-duarte-portfolio.com.br/" },
   ],
 
   hero: {
@@ -280,6 +281,7 @@ export const site = {
       { label: "GitHub", href: "https://github.com/ad2486", icon: "github" },
       { label: "LinkedIn", href: "https://linkedin.com/in/arthur-duarte-ad2486", icon: "linkedin" },
       { label: "YouTube", href: "https://youtube.com/@ad.2486", icon: "youtube" },
+      { label: "Estante: posts e livros", href: "https://estante.arthur-duarte-portfolio.com.br/", icon: "books" },
     ] satisfies Link[],
   },
 };
