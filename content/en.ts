@@ -91,9 +91,6 @@ export const site: Site = {
         id: "infra",
         title: "Infra",
         items: [
-          { label: "Arch", icon: "arch" },
-          { label: "CachyOS", icon: "cachyos" },
-          { label: "Fedora", icon: "fedora" },
           { label: "Debian", icon: "debian" },
           { label: "Ubuntu Server", icon: "ubuntu" },
           { label: "Rocky Linux", icon: "rocky" },

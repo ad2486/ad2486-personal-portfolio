@@ -3,8 +3,8 @@
 
 export type IconKey =
   | "python" | "javascript" | "typescript" | "rust" | "sql" | "postgresql"
-  | "nodejs" | "fastify" | "prisma" | "zod" | "docker" | "linux" | "arch"
-  | "cachyos" | "fedora" | "debian" | "ubuntu" | "githubactions" | "ssh"
+  | "nodejs" | "fastify" | "prisma" | "zod" | "docker" | "linux"
+  | "debian" | "ubuntu" | "githubactions" | "ssh"
   | "oracle" | "java" | "react" | "functional" | "github" | "youtube"
   | "linkedin" | "discordjs" | "vitest" | "openapi" | "email"
   | "fastapi" | "mysql" | "aws" | "nginx" | "sqlalchemy" | "rocky";
@@ -125,9 +125,6 @@ export const site = {
         id: "infra",
         title: "Infra",
         items: [
-          { label: "Arch", icon: "arch" },
-          { label: "CachyOS", icon: "cachyos" },
-          { label: "Fedora", icon: "fedora" },
           { label: "Debian", icon: "debian" },
           { label: "Ubuntu Server", icon: "ubuntu" },
           { label: "Rocky Linux", icon: "rocky" },
