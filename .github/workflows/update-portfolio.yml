@@ -28,6 +28,16 @@ jobs:
 
       - run: npm ci
 
+      # Parte do PR aberto, se houver, pra não perder o que ainda não teve merge
+      - name: Partir do PR aberto
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -n "$(gh pr list --head bot/atualizar-portfolio --state open --json number --jq '.[]')" ]; then
+            git fetch origin bot/atualizar-portfolio
+            git checkout FETCH_HEAD -- content/site.ts content/en.ts content/de.ts
+          fi
+
       - uses: anthropics/claude-code-action@v1
         env:
           GH_TOKEN: ${{ github.token }}
@@ -62,6 +72,8 @@ jobs:
 
             Regras:
             - Use só informação que está nos repositórios. Não invente features, números ou tecnologias.
+            - O texto atual é a base. Acrescente o que é novo e corrija o que está errado, mas não
+              remova nem resuma detalhes, itens de stack ou trechos que o repositório ainda confirma.
             - Não mexa em nada fora de projects (sobre, stack, conteúdo, contato, ui, meta).
             - Português: tom direto e técnico, frases curtas. Traduza o mesmo conteúdo para en e de,
               no tom dos itens já existentes em cada arquivo.
