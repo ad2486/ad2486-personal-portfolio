@@ -261,7 +261,7 @@ export const site = {
       { label: "GitHub Actions", detail: "npm ci e next build geram o site estático em out/." },
       { label: "rsync via SSH", detail: "Envia só o que mudou, com um usuário de deploy sem sudo." },
       { label: "nginx", detail: "VM Ubuntu na Oracle Cloud, com gzip e cache longo nos assets." },
-      { label: "HTTPS", detail: "Certificado Let's Encrypt, renovado pelo certbot." },
+      { label: "Cloudflare", detail: "Proxy e CDN na frente da VM. HTTPS até a origem, com certificado Let's Encrypt renovado pelo certbot." },
       { label: "Você", detail: "A raiz redireciona para /pt/, /en/ ou /de/ conforme o idioma do navegador." },
     ],
     weekly: "Toda segunda, um workflow com o Claude lê meus repositórios com a topic portfolio e abre um PR atualizando os projetos nos três idiomas. Eu reviso e faço o merge; o deploy roda sozinho.",

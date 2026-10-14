@@ -227,7 +227,7 @@ export const site: Site = {
       { label: "GitHub Actions", detail: "npm ci und next build erzeugen die statische Seite in out/." },
       { label: "rsync über SSH", detail: "Überträgt nur Änderungen, mit einem Deploy-Benutzer ohne sudo." },
       { label: "nginx", detail: "Ubuntu-VM in der Oracle Cloud, mit gzip und langem Caching für Assets." },
-      { label: "HTTPS", detail: "Let's-Encrypt-Zertifikat, erneuert durch certbot." },
+      { label: "Cloudflare", detail: "Proxy und CDN vor der VM. HTTPS bis zum Ursprungsserver, mit Let's-Encrypt-Zertifikat, erneuert durch certbot." },
       { label: "Du", detail: "Die Startseite leitet je nach Browsersprache auf /pt/, /en/ oder /de/ weiter." },
     ],
     weekly: "Jeden Montag liest ein Workflow mit Claude meine Repositories mit dem Topic portfolio und öffnet einen PR, der die Projekte in allen drei Sprachen aktualisiert. Ich prüfe und merge; das Deployment läuft automatisch.",
