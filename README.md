@@ -86,3 +86,9 @@ DEPLOY_HOST=usuario@ip ./deploy.sh
 ```
 
 O script roda `npm run build` e sincroniza `out/` para `/var/www/portfolio/` via rsync.
+
+## Uso de IA
+
+- **Frontend**: delegado por completo ao Claude Code (redesign, seção de stack, acessibilidade e SEO).
+- **Infraestrutura e configurações**: a maior parte fiz na mão (VM, nginx, rate limit, deploy, Cloudflare). Pedi à IA só ajustes pontuais nos arquivos de config.
+- **Automação**: a lista de projetos é atualizada por um workflow que usa o Claude (`.github/workflows/update-portfolio.yml`) e abre um PR para revisão.
