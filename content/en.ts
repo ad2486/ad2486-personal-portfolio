@@ -92,7 +92,15 @@ export const site: Site = {
       {
         id: "frontend",
         title: "Frontend",
-        items: [{ label: "React", icon: "react" }],
+        items: [
+          { label: "React", icon: "react" },
+          { label: "Vite", icon: "vite" },
+          { label: "React Router", icon: "reactrouter" },
+          { label: "TanStack Query", icon: "tanstackquery" },
+          { label: "React Hook Form", icon: "reacthookform" },
+          { label: "Tailwind CSS", icon: "tailwind" },
+          { label: "shadcn/ui", icon: "shadcn" },
+        ],
       },
       {
         id: "infra",

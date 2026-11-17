@@ -7,7 +7,8 @@ export type IconKey =
   | "debian" | "ubuntu" | "githubactions" | "ssh"
   | "oracle" | "java" | "react" | "elixir" | "github" | "youtube"
   | "linkedin" | "discordjs" | "vitest" | "openapi" | "email"
-  | "fastapi" | "mysql" | "aws" | "nginx" | "sqlalchemy" | "rocky" | "books" | "c" | "kotlin" | "go";
+  | "fastapi" | "mysql" | "aws" | "nginx" | "sqlalchemy" | "rocky" | "books" | "c" | "kotlin" | "go"
+  | "vite" | "reactrouter" | "tanstackquery" | "reacthookform" | "tailwind" | "shadcn";
 
 /** E-mail stays split so the address never appears whole in the static HTML; EmailLink joins it in the browser. */
 export type Link = { label: string; icon: IconKey } & (
@@ -126,7 +127,15 @@ export const site = {
       {
         id: "frontend",
         title: "Frontend",
-        items: [{ label: "React", icon: "react" }],
+        items: [
+          { label: "React", icon: "react" },
+          { label: "Vite", icon: "vite" },
+          { label: "React Router", icon: "reactrouter" },
+          { label: "TanStack Query", icon: "tanstackquery" },
+          { label: "React Hook Form", icon: "reacthookform" },
+          { label: "Tailwind CSS", icon: "tailwind" },
+          { label: "shadcn/ui", icon: "shadcn" },
+        ],
       },
       {
         id: "infra",

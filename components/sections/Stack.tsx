@@ -3,8 +3,8 @@ import { TechIcon } from "@/components/TechIcon";
 import { getSite } from "@/content/i18n";
 import type { IconKey } from "@/content/site";
 
-// Brand hex is near-black (Rust, Fastify, Prisma): invisible on the dark bg, so hover to text instead.
-const darkBrand = new Set<IconKey>(["rust", "fastify", "prisma"]);
+// Brand hex is near-black (Rust, Fastify, Prisma, shadcn/ui): invisible on the dark bg, so hover to text instead.
+const darkBrand = new Set<IconKey>(["rust", "fastify", "prisma", "shadcn"]);
 
 export async function Stack() {
   const site = await getSite();
