@@ -7,7 +7,7 @@ export type IconKey =
   | "debian" | "ubuntu" | "githubactions" | "ssh"
   | "oracle" | "java" | "react" | "elixir" | "github" | "youtube"
   | "linkedin" | "discordjs" | "vitest" | "openapi" | "email"
-  | "fastapi" | "mysql" | "aws" | "nginx" | "sqlalchemy" | "rocky" | "books";
+  | "fastapi" | "mysql" | "aws" | "nginx" | "sqlalchemy" | "rocky" | "books" | "c" | "kotlin" | "go";
 
 /** E-mail stays split so the address never appears whole in the static HTML; EmailLink joins it in the browser. */
 export type Link = { label: string; icon: IconKey } & (
@@ -28,7 +28,7 @@ export type Project = {
 
 export type StackGroup = {
   /** Stable id for layout; never translated. */
-  id: "languages" | "backend" | "infra" | "studying";
+  id: "languages" | "backend" | "frontend" | "infra" | "studying";
   title: string;
   items: { label: string; icon: IconKey }[];
 };
@@ -106,6 +106,7 @@ export const site = {
           { label: "TypeScript", icon: "typescript" },
           { label: "SQL", icon: "sql" },
           { label: "Rust", icon: "rust" },
+          { label: "C", icon: "c" },
         ],
       },
       {
@@ -121,6 +122,11 @@ export const site = {
           { label: "PostgreSQL", icon: "postgresql" },
           { label: "MySQL", icon: "mysql" },
         ],
+      },
+      {
+        id: "frontend",
+        title: "Frontend",
+        items: [{ label: "React", icon: "react" }],
       },
       {
         id: "infra",
@@ -142,7 +148,8 @@ export const site = {
         title: "Estudando",
         items: [
           { label: "Java", icon: "java" },
-          { label: "React", icon: "react" },
+          { label: "Kotlin", icon: "kotlin" },
+          { label: "Go", icon: "go" },
           { label: "Elixir", icon: "elixir" },
         ],
       },
@@ -188,6 +195,21 @@ export const site = {
         stack: ["Rust", "Shell", "GitHub Actions"],
         repo: "https://github.com/ad2486/dev-tool-cli",
         featured: true,
+      },
+      {
+        slug: "raw-clang-crud",
+        title: "Servidor HTTP em C",
+        summary:
+          "Servidor HTTP com CRUD de usuários escrito em C, direto em cima de sockets POSIX, sem framework. Persistência em SQLite.",
+        details: [
+          "Parser de HTTP/1.1 feito à mão: lê até o fim dos headers, respeita o Content-Length e monta a resposta.",
+          "Thread pool fixo com 8 workers e fila circular de 128 conexões, protegida por mutex e variável de condição. Fila cheia responde 503.",
+          "SQLite em modo WAL com busy timeout e prepared statements; cada requisição abre a própria conexão.",
+          "Timeout de 5 s na leitura, SIGPIPE ignorado e encerramento por SIGINT que espera os workers esvaziarem a fila.",
+          "Build padrão com ASan e UBSan, alvo separado com ThreadSanitizer e teste da camada de banco com assert.",
+        ],
+        stack: ["C", "POSIX sockets", "pthreads", "SQLite", "cJSON", "Make"],
+        repo: "https://github.com/ad2486/raw-clang-crud",
       },
       {
         slug: "multi-llm-cli",

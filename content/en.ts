@@ -72,6 +72,7 @@ export const site: Site = {
           { label: "TypeScript", icon: "typescript" },
           { label: "SQL", icon: "sql" },
           { label: "Rust", icon: "rust" },
+          { label: "C", icon: "c" },
         ],
       },
       {
@@ -87,6 +88,11 @@ export const site: Site = {
           { label: "PostgreSQL", icon: "postgresql" },
           { label: "MySQL", icon: "mysql" },
         ],
+      },
+      {
+        id: "frontend",
+        title: "Frontend",
+        items: [{ label: "React", icon: "react" }],
       },
       {
         id: "infra",
@@ -108,7 +114,8 @@ export const site: Site = {
         title: "Studying",
         items: [
           { label: "Java", icon: "java" },
-          { label: "React", icon: "react" },
+          { label: "Kotlin", icon: "kotlin" },
+          { label: "Go", icon: "go" },
           { label: "Elixir", icon: "elixir" },
         ],
       },
@@ -154,6 +161,21 @@ export const site: Site = {
         stack: ["Rust", "Shell", "GitHub Actions"],
         repo: "https://github.com/ad2486/dev-tool-cli",
         featured: true,
+      },
+      {
+        slug: "raw-clang-crud",
+        title: "HTTP server in C",
+        summary:
+          "HTTP server with a users CRUD written in C, directly on top of POSIX sockets, no framework. Persistence in SQLite.",
+        details: [
+          "Hand-written HTTP/1.1 parser: reads until the end of the headers, honors Content-Length and builds the response.",
+          "Fixed thread pool with 8 workers and a circular queue of 128 connections, guarded by a mutex and a condition variable. A full queue answers 503.",
+          "SQLite in WAL mode with a busy timeout and prepared statements; each request opens its own connection.",
+          "5 s read timeout, SIGPIPE ignored and a SIGINT shutdown that waits for the workers to drain the queue.",
+          "Default build with ASan and UBSan, a separate ThreadSanitizer target and an assert-based test of the database layer.",
+        ],
+        stack: ["C", "POSIX sockets", "pthreads", "SQLite", "cJSON", "Make"],
+        repo: "https://github.com/ad2486/raw-clang-crud",
       },
       {
         slug: "multi-llm-cli",

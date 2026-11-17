@@ -72,6 +72,7 @@ export const site: Site = {
           { label: "TypeScript", icon: "typescript" },
           { label: "SQL", icon: "sql" },
           { label: "Rust", icon: "rust" },
+          { label: "C", icon: "c" },
         ],
       },
       {
@@ -87,6 +88,11 @@ export const site: Site = {
           { label: "PostgreSQL", icon: "postgresql" },
           { label: "MySQL", icon: "mysql" },
         ],
+      },
+      {
+        id: "frontend",
+        title: "Frontend",
+        items: [{ label: "React", icon: "react" }],
       },
       {
         id: "infra",
@@ -108,7 +114,8 @@ export const site: Site = {
         title: "Aktuell im Lernen",
         items: [
           { label: "Java", icon: "java" },
-          { label: "React", icon: "react" },
+          { label: "Kotlin", icon: "kotlin" },
+          { label: "Go", icon: "go" },
           { label: "Elixir", icon: "elixir" },
         ],
       },
@@ -154,6 +161,21 @@ export const site: Site = {
         stack: ["Rust", "Shell", "GitHub Actions"],
         repo: "https://github.com/ad2486/dev-tool-cli",
         featured: true,
+      },
+      {
+        slug: "raw-clang-crud",
+        title: "HTTP-Server in C",
+        summary:
+          "HTTP-Server mit Benutzer-CRUD, in C direkt auf POSIX-Sockets geschrieben, ohne Framework. Persistenz in SQLite.",
+        details: [
+          "Handgeschriebener HTTP/1.1-Parser: liest bis zum Ende der Header, beachtet Content-Length und baut die Antwort.",
+          "Fester Thread-Pool mit 8 Workern und einer Ringpuffer-Warteschlange für 128 Verbindungen, geschützt durch Mutex und Bedingungsvariable. Ist die Warteschlange voll, antwortet der Server mit 503.",
+          "SQLite im WAL-Modus mit Busy-Timeout und Prepared Statements; jede Anfrage öffnet ihre eigene Verbindung.",
+          "5 s Timeout beim Lesen, SIGPIPE wird ignoriert, und bei SIGINT arbeiten die Worker die Warteschlange noch ab, bevor der Server endet.",
+          "Standard-Build mit ASan und UBSan, eigenes Target mit ThreadSanitizer und ein Test der Datenbankschicht mit assert.",
+        ],
+        stack: ["C", "POSIX sockets", "pthreads", "SQLite", "cJSON", "Make"],
+        repo: "https://github.com/ad2486/raw-clang-crud",
       },
       {
         slug: "multi-llm-cli",

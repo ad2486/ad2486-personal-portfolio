@@ -1,4 +1,7 @@
 import {
+  siC,
+  siGo,
+  siKotlin,
   siDebian,
   siDiscorddotjs,
   siDocker,
@@ -47,6 +50,9 @@ const brand = {
   javascript: siJavascript,
   typescript: siTypescript,
   rust: siRust,
+  c: siC,
+  kotlin: siKotlin,
+  go: siGo,
   postgresql: siPostgresql,
   mysql: siMysql,
   nodejs: siNodedotjs,
