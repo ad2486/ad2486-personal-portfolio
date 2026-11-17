@@ -116,7 +116,6 @@ export const site: Site = {
           { label: "Java", icon: "java" },
           { label: "Kotlin", icon: "kotlin" },
           { label: "Go", icon: "go" },
-          { label: "Elixir", icon: "elixir" },
         ],
       },
     ],

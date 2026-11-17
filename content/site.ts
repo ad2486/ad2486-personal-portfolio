@@ -150,7 +150,6 @@ export const site = {
           { label: "Java", icon: "java" },
           { label: "Kotlin", icon: "kotlin" },
           { label: "Go", icon: "go" },
-          { label: "Elixir", icon: "elixir" },
         ],
       },
     ] satisfies StackGroup[],
